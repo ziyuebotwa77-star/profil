@@ -1,271 +1,752 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>𝐙𝐢 𝐘𝐮𝐞 (子月)</title>
-  <meta name="description" content="Profil 𝐙𝐢 𝐘𝐮𝐞 (子月)">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #0a0a1a;
-      color: #fff;
-      padding: 20px;
-      overflow: hidden;
-      position: relative;
-    }
-
-    /* Blob gradasi bergerak di background */
-    .bg-blob {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.7;
-      z-index: 0;
-      animation: float 12s ease-in-out infinite;
-    }
-    .blob-1 {
-      width: 320px; height: 320px;
-      background: radial-gradient(circle, #7c3aed, #4c1d95);
-      top: -80px; left: -80px;
-      animation-delay: 0s;
-    }
-    .blob-2 {
-      width: 380px; height: 380px;
-      background: radial-gradient(circle, #06b6d4, #0891b2);
-      bottom: -100px; right: -100px;
-      animation-delay: 3s;
-    }
-    .blob-3 {
-      width: 280px; height: 280px;
-      background: radial-gradient(circle, #ec4899, #be185d);
-      top: 40%; left: 50%;
-      transform: translate(-50%, -50%);
-      animation-delay: 6s;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(40px, -30px) scale(1.1); }
-      66% { transform: translate(-30px, 40px) scale(0.95); }
-    }
-
-    /* Kartu liquid glass */
-    .card {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 400px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 28px;
-      padding: 44px 28px;
-      text-align: center;
-      backdrop-filter: blur(24px) saturate(180%);
-      -webkit-backdrop-filter: blur(24px) saturate(180%);
-      box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.5),
-        inset 0 1px 0 rgba(255, 255, 255, 0.25),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.05);
-      overflow: hidden;
-    }
-
-    /* Pantulan cahaya melintas di kartu */
-    .card::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: linear-gradient(
-        115deg,
-        transparent 30%,
-        rgba(255, 255, 255, 0.12) 45%,
-        rgba(255, 255, 255, 0.25) 50%,
-        rgba(255, 255, 255, 0.12) 55%,
-        transparent 70%
-      );
-      animation: shine 6s linear infinite;
-      pointer-events: none;
-    }
-
-    @keyframes shine {
-      0% { transform: translateX(-100%) translateY(-100%) rotate(0deg); }
-      100% { transform: translateX(100%) translateY(100%) rotate(0deg); }
-    }
-
-    /* Avatar dengan ring gradient berputar */
-    .avatar-wrap {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      margin: 0 auto 22px;
-    }
-    .avatar-ring {
-      position: absolute;
-      inset: -4px;
-      border-radius: 50%;
-      background: conic-gradient(from 0deg, #7c3aed, #06b6d4, #ec4899, #7c3aed);
-      animation: spin 6s linear infinite;
-      z-index: 0;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    .avatar {
-      position: relative;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid rgba(10, 10, 26, 0.9);
-      z-index: 1;
-      display: block;
-    }
-
-    .name {
-      font-size: 26px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #fff, #c4b5fd);
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .username {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 18px;
-      font-weight: 500;
-    }
-    .bio {
-      font-size: 14px;
-      line-height: 1.6;
-      color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 28px;
-      padding: 0 8px;
-    }
-
-    .links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 15px 20px;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 16px;
-      color: #fff;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      position: relative;
-      overflow: hidden;
-    }
-    .link::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.15) 50%, transparent 60%);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-    .link:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 10px 30px rgba(124, 58, 237, 0.4);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-    .link:hover::after {
-      transform: translateX(100%);
-    }
-    .link:active { transform: translateY(-1px) scale(0.99); }
-
-    .link svg { width: 18px; height: 18px; flex-shrink: 0; }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 12px;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    @media (max-width: 380px) {
-      .card { padding: 36px 22px; }
-      .name { font-size: 22px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>𝐙𝐢 𝐘𝐮𝐞 (子月)</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0a0a1a;
+  color: #fff;
+  padding: 16px;
+  overflow-x: hidden;
+}
+.bg-blob { position: fixed; border-radius: 50%; filter: blur(90px); opacity: 0.6; z-index: 0; pointer-events: none; }
+.blob-1 { width: 320px; height: 320px; background: #7c3aed; top: -100px; left: -100px; }
+.blob-2 { width: 380px; height: 380px; background: #06b6d4; bottom: -120px; right: -120px; }
+.blob-3 { width: 260px; height: 260px; background: #ec4899; top: 45%; left: 50%; transform: translate(-50%,-50%); }
+.card {
+  position: relative; z-index: 2; width: 100%; max-width: 400px;
+  background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 28px; padding: 26px 20px 30px;
+  backdrop-filter: blur(24px) saturate(180%); -webkit-backdrop-filter: blur(24px) saturate(180%);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.25);
+}
+.tabs { display: flex; gap: 4px; background: rgba(0,0,0,0.25); border-radius: 14px; padding: 5px; margin-bottom: 22px; }
+.tab {
+  flex: 1; padding: 9px 2px; text-align: center; font-size: 10.5px; font-weight: 600;
+  color: rgba(255,255,255,0.6); border-radius: 10px; cursor: pointer; user-select: none;
+}
+.tab.active { background: linear-gradient(135deg, #7c3aed, #06b6d4); color: #fff; box-shadow: 0 4px 14px rgba(124,58,237,0.5); }
+.page { display: none; animation: fadeIn 0.4s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.avatar-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto 14px; cursor: pointer; }
+.avatar-ring {
+  position: absolute; inset: -4px; border-radius: 50%;
+  background: conic-gradient(from 0deg, #7c3aed, #06b6d4, #ec4899, #f59e0b, #7c3aed);
+  animation: spin 6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.avatar { position: relative; width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid rgba(10,10,26,0.9); display: block; }
+.avatar-wrap.has-status .avatar-ring {
+  inset: -6px;
+  background: conic-gradient(from 0deg, #0ea5e9, #22d3ee, #60a5fa, #38bdf8, #818cf8, #22d3ee, #0ea5e9);
+  animation: spin 4s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(56,189,248,0.7));
+}
+.avatar-wrap.has-status::after {
+  content: ''; position: absolute; inset: -6px; border-radius: 50%;
+  background: conic-gradient(from 0deg, transparent 0deg, transparent 60deg, rgba(255,255,255,0.85) 90deg, transparent 120deg, transparent 360deg);
+  animation: spin 4s linear infinite; pointer-events: none; mix-blend-mode: overlay;
+}
+.status-badge {
+  position: absolute; bottom: 2px; right: 2px; width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9, #6366f1);
+  border: 3px solid rgba(10,10,26,0.95);
+  display: flex; align-items: center; justify-content: center; z-index: 3;
+  box-shadow: 0 0 12px rgba(56,189,248,0.8);
+  animation: pulseBlue 2s ease-in-out infinite;
+}
+.status-badge svg { width: 14px; height: 14px; fill: #fff; }
+@keyframes pulseBlue {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(56,189,248,0.8); }
+  50% { box-shadow: 0 0 0 9px rgba(56,189,248,0); }
+}
+.status-hint {
+  text-align: center; font-size: 11px; font-weight: 600; margin-bottom: 18px;
+  background: linear-gradient(90deg, #38bdf8, #818cf8, #22d3ee, #38bdf8);
+  background-size: 200% auto; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; animation: shineText 3s linear infinite;
+}
+@keyframes shineText { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+.status-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 9999; display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; }
+.status-modal.active { display: flex; opacity: 1; }
+.story-container { position: relative; width: 100%; max-width: 420px; height: 100vh; display: flex; flex-direction: column; background: #000; overflow: hidden; }
+.story-progress { position: absolute; top: 12px; left: 12px; right: 12px; height: 3px; background: rgba(255,255,255,0.25); border-radius: 2px; z-index: 5; overflow: hidden; }
+.story-progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #38bdf8, #818cf8); border-radius: 2px; transition: width 0.1s linear; }
+.story-header { position: absolute; top: 24px; left: 16px; right: 16px; display: flex; align-items: center; gap: 12px; z-index: 5; color: #fff; }
+.story-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #38bdf8; }
+.story-info { flex: 1; }
+.story-name { font-size: 14px; font-weight: 600; }
+.story-time { font-size: 11px; color: rgba(255,255,255,0.7); }
+.story-close { width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; color: #fff; }
+.story-video { width: 100%; height: 100%; object-fit: contain; background: #000; display: block; }
+.sound-btn { position: absolute; top: 70px; right: 16px; width: 40px; height: 40px; border-radius: 50%; background: rgba(56,189,248,0.2); border: 1px solid rgba(56,189,248,0.4); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 6; }
+.sound-btn.unmuted { background: rgba(56,189,248,0.5); }
+.tap-left, .tap-right { position: absolute; top: 70px; bottom: 0; width: 50%; z-index: 4; cursor: pointer; }
+.tap-left { left: 0; } .tap-right { right: 0; }
+.story-caption { position: absolute; bottom: 30px; left: 20px; right: 20px; text-align: center; color: #fff; font-size: 14px; z-index: 5; padding: 10px; background: rgba(56,189,248,0.15); backdrop-filter: blur(10px); border: 1px solid rgba(56,189,248,0.3); border-radius: 12px; }
+.name { font-size: 24px; font-weight: 700; text-align: center; margin-bottom: 6px; background: linear-gradient(135deg, #fff, #c4b5fd); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.username { font-size: 13px; color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 18px; }
+.bio { font-size: 13.5px; line-height: 1.7; color: rgba(255,255,255,0.8); text-align: center; padding: 0 6px; }
+.slide-title { font-size: 20px; font-weight: 700; text-align: center; margin-bottom: 4px; background: linear-gradient(135deg, #fff, #a5b4fc); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.slide-sub { font-size: 12px; color: rgba(255,255,255,0.5); text-align: center; margin-bottom: 18px; }
+.links { display: flex; flex-direction: column; gap: 10px; }
+.link { display: flex; align-items: center; gap: 12px; padding: 13px 16px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); border-radius: 14px; color: #fff; text-decoration: none; font-size: 13.5px; font-weight: 600; }
+.link-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; font-weight: 700; }
+.link-1 .link-icon { background: linear-gradient(135deg, #25D366, #128C7E); }
+.link-2 .link-icon { background: linear-gradient(135deg, #f58529, #dd2a7b, #8134af); }
+.link-3 .link-icon { background: linear-gradient(135deg, #000, #25F4EE); }
+.link-4 .link-icon { background: linear-gradient(135deg, #333, #666); }
+.link-text { display: flex; flex-direction: column; text-align: left; flex: 1; }
+.link-text small { font-size: 10.5px; font-weight: 400; color: rgba(255,255,255,0.55); margin-top: 1px; }
+.link-arrow { color: rgba(255,255,255,0.4); font-size: 18px; }
+.info-list { display: flex; flex-direction: column; gap: 10px; margin-top: 4px; }
+.info-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 13px; cursor: pointer; }
+.info-icon { width: 38px; height: 38px; border-radius: 10px; background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3)); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 17px; }
+.info-content { flex: 1; text-align: left; }
+.info-label { font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px; }
+.info-value { font-size: 13.5px; font-weight: 600; color: rgba(255,255,255,0.9); margin-top: 1px; }
+.info-arrow { color: rgba(255,255,255,0.35); font-size: 18px; }
+.quote { margin-top: 18px; padding: 14px 16px; background: rgba(255,255,255,0.04); border-left: 3px solid #38bdf8; border-radius: 8px; font-style: italic; font-size: 12.5px; color: rgba(255,255,255,0.7); line-height: 1.6; }
+.footer { margin-top: 22px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); }
+.detail-modal { position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(14px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 20px; opacity: 0; transition: opacity 0.3s ease; }
+.detail-modal.active { display: flex; opacity: 1; }
+.detail-box { width: 100%; max-width: 360px; background: rgba(20,20,40,0.9); border: 1px solid rgba(56,189,248,0.3); border-radius: 24px; padding: 28px 22px; text-align: center; animation: popIn 0.35s cubic-bezier(0.4, 0, 0.2, 1); }
+@keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.detail-icon { width: 64px; height: 64px; margin: 0 auto 16px; border-radius: 18px; background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(6,182,212,0.4)); border: 1px solid rgba(56,189,248,0.3); display: flex; align-items: center; justify-content: center; font-size: 30px; }
+.detail-title { font-size: 19px; font-weight: 700; margin-bottom: 10px; background: linear-gradient(135deg, #fff, #38bdf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.detail-text { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.8); text-align: left; margin-bottom: 20px; padding: 14px 16px; background: rgba(255,255,255,0.04); border-left: 3px solid #38bdf8; border-radius: 10px; }
+.detail-close { width: 100%; padding: 12px; border-radius: 12px; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; border: none; font-family: inherit; }
+.tool-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 16px; margin-bottom: 14px; }
+.tool-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.tool-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(6,182,212,0.3)); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.tool-name { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9); }
+.tool-input { width: 100%; padding: 11px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.25); color: #fff; font-size: 13px; font-family: inherit; outline: none; margin-bottom: 10px; }
+.tool-input::placeholder { color: rgba(255,255,255,0.35); }
+.tool-btn { width: 100%; padding: 11px; border-radius: 12px; border: none; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.tool-result { margin-top: 10px; font-size: 12.5px; color: rgba(255,255,255,0.8); word-break: break-all; }
+.tool-result img { width: 100%; max-width: 220px; border-radius: 10px; display: block; margin: 8px auto 0; }
+.tool-result a { color: #38bdf8; text-decoration: none; }
+.tool-error { color: #f87171; }
+.tool-loading { color: #facc15; }
+.ai-chat-box { max-height: 300px; overflow-y: auto; margin-bottom: 12px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 12px; min-height: 100px; }
+.ai-msg { padding: 10px 12px; margin-bottom: 8px; border-radius: 12px; font-size: 13px; line-height: 1.5; word-wrap: break-word; }
+.ai-user { background: rgba(56,189,248,0.2); border: 1px solid rgba(56,189,248,0.3); margin-left: 30px; text-align: right; }
+.ai-bot { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); margin-right: 30px; }
+.ai-bot.thinking { color: #facc15; font-style: italic; }
+.ai-input-row { display: flex; gap: 8px; }
+.ai-input-row input { flex: 1; padding: 11px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.25); color: #fff; font-size: 13px; font-family: inherit; outline: none; }
+.ai-input-row button { padding: 11px 16px; border-radius: 12px; border: none; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.ai-img-result { margin-top: 10px; text-align: center; }
+.ai-img-result img { width: 100%; border-radius: 12px; display: block; }
+.game-tabs { display: flex; gap: 5px; margin-bottom: 14px; background: rgba(0,0,0,0.25); border-radius: 12px; padding: 4px; }
+.game-tab { flex: 1; padding: 8px 2px; text-align: center; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); border-radius: 9px; cursor: pointer; user-select: none; }
+.game-tab.active { background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; }
+.game-panel { display: none; }
+.game-panel.active { display: block; animation: fadeIn 0.3s ease; }
+.suit-arena { display: flex; align-items: center; justify-content: space-around; margin: 16px 0; gap: 10px; }
+.suit-side { text-align: center; flex: 1; }
+.suit-label { font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
+.suit-emoji { font-size: 50px; width: 85px; height: 85px; margin: 0 auto; border-radius: 50%; background: rgba(56,189,248,0.1); border: 2px solid rgba(56,189,248,0.35); display: flex; align-items: center; justify-content: center; }
+.suit-emoji.shake { animation: suitShake 0.4s ease; }
+@keyframes suitShake { 0%, 100% { transform: translateY(0); } 25% { transform: translateY(-8px) rotate(-5deg); } 50% { transform: translateY(0) rotate(5deg); } 75% { transform: translateY(-8px) rotate(-5deg); } }
+.suit-emoji.win { border-color: #22c55e; background: rgba(34,197,94,0.2); box-shadow: 0 0 24px rgba(34,197,94,0.6); }
+.suit-emoji.lose { border-color: #ef4444; background: rgba(239,68,68,0.2); box-shadow: 0 0 24px rgba(239,68,68,0.6); }
+.suit-vs { font-size: 16px; font-weight: 700; color: rgba(255,255,255,0.4); }
+.suit-result { text-align: center; font-size: 15px; font-weight: 600; padding: 14px; border-radius: 14px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 16px; }
+.suit-result.win { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #4ade80; }
+.suit-result.lose { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: #f87171; }
+.suit-result.draw { background: rgba(234,179,8,0.15); border-color: rgba(234,179,8,0.4); color: #facc15; }
+.suit-buttons { display: flex; gap: 12px; margin-bottom: 18px; }
+.suit-btn { flex: 1; padding: 18px; font-size: 32px; border-radius: 16px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); cursor: pointer; font-family: inherit; }
+.suit-btn:active { transform: scale(0.92); }
+.suit-btn:disabled { opacity: 0.4; }
+.suit-score { display: flex; gap: 10px; margin-bottom: 14px; }
+.score-item { flex: 1; text-align: center; padding: 12px 6px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; }
+.score-label { font-size: 10px; color: rgba(255,255,255,0.5); text-transform: uppercase; margin-bottom: 4px; }
+.score-val { font-size: 22px; font-weight: 700; background: linear-gradient(135deg, #fff, #38bdf8); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.suit-reset { width: 100%; padding: 11px; border-radius: 12px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.7); font-size: 12.5px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.dice-area { text-align: center; padding: 16px 0; }
+.dice-box { font-size: 90px; margin-bottom: 14px; display: inline-block; }
+.dice-box.roll { animation: diceRoll 0.6s ease; }
+@keyframes diceRoll { 0% { transform: rotate(0deg) scale(1); } 25% { transform: rotate(180deg) scale(1.2); } 50% { transform: rotate(360deg) scale(0.9); } 75% { transform: rotate(540deg) scale(1.1); } 100% { transform: rotate(720deg) scale(1); } }
+.dice-history { margin-top: 14px; font-size: 12.5px; color: rgba(255,255,255,0.7); min-height: 20px; }
+.angka-input { width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.14); background: rgba(0,0,0,0.25); color: #fff; font-size: 15px; font-family: inherit; outline: none; text-align: center; margin-bottom: 10px; }
+.angka-btn { width: 100%; padding: 12px; border-radius: 12px; border: none; background: linear-gradient(135deg, #38bdf8, #6366f1); color: #fff; font-size: 13.5px; font-weight: 600; cursor: pointer; font-family: inherit; margin-bottom: 12px; }
+.angka-btn:disabled { opacity: 0.5; }
+.angka-hint { text-align: center; font-size: 13px; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 10px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+.angka-hint.panas { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: #f87171; }
+.angka-hint.dingin { background: rgba(56,189,248,0.15); border-color: rgba(56,189,248,0.4); color: #38bdf8; }
+.angka-hint.benar { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #4ade80; }
+.angka-history { font-size: 12px; color: rgba(255,255,255,0.6); text-align: center; min-height: 20px; }
+.ttt-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; max-width: 260px; margin-left: auto; margin-right: auto; }
+.ttt-cell { aspect-ratio: 1; border-radius: 12px; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.3); display: flex; align-items: center; justify-content: center; font-size: 40px; cursor: pointer; }
+.ttt-cell:active { transform: scale(0.94); }
+.ttt-cell.win { background: rgba(34,197,94,0.25); border-color: #22c55e; }
+.ttt-status { text-align: center; font-size: 14px; font-weight: 600; padding: 12px; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); margin-bottom: 12px; }
+.ttt-status.win { background: rgba(34,197,94,0.15); border-color: rgba(34,197,94,0.4); color: #4ade80; }
+.ttt-status.lose { background: rgba(239,68,68,0.15); border-color: rgba(239,68,68,0.4); color: #f87171; }
+.ttt-status.draw { background: rgba(234,179,8,0.15); border-color: rgba(234,179,8,0.4); color: #facc15; }
+</style>
 </head>
 <body>
-
-  <!-- Blob background -->
-  <div class="bg-blob blob-1"></div>
-  <div class="bg-blob blob-2"></div>
-  <div class="bg-blob blob-3"></div>
-
-  <div class="card">
-
-    <!-- Avatar dengan ring gradient -->
-    <div class="avatar-wrap">
-      <div class="avatar-ring"></div>
-      <img class="avatar" src="https://cdn.phototourl.com/member/2026-10-02-e0707ef5-0f8e-4a68-a7f9-143dec2a30d4.png" alt="Foto Profil">
-    </div>
-
-    <!-- Nama -->
-    <h1 class="name">𝐙𝐢 𝐘𝐮𝐞 (子月)</h1>
-
-    <!-- Username -->
-    <p class="username">@ziyue</p>
-
-    <!-- Bio -->
-    <p class="bio">Developer bot WhatsApp. Suka ngoding, ngoprek, dan bikin sesuatu yang berguna.</p>
-
-    <!-- Link-link -->
-    <div class="links">
-
-      <a class="link" href="https://wa.me/6285129871386" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        WhatsApp
-      </a>
-
-      <a class="link" href="https://instagram.com/iqbal518578" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        Instagram
-      </a>
-
-      <a class="link" href="https://tiktok.com/@iqbbblllaaa9292" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1-.1z"/></svg>
-        TikTok
-      </a>
-
-      <a class="link" href="https://github.com/ziyuebotwa77-star" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-        GitHub
-      </a>
-
-    </div>
-
-    <p class="footer">© 2026 iqbal</p>
-
+<div class="bg-blob blob-1"></div>
+<div class="bg-blob blob-2"></div>
+<div class="bg-blob blob-3"></div>
+<div class="card">
+  <div class="tabs">
+    <div class="tab active" data-page="0">Profil</div>
+    <div class="tab" data-page="1">Sosial</div>
+    <div class="tab" data-page="2">Tools</div>
+    <div class="tab" data-page="3">AI</div>
+    <div class="tab" data-page="4">Game</div>
+    <div class="tab" data-page="5">Tentang</div>
   </div>
+<div class="page active" id="page-0">
+  <div class="avatar-wrap has-status" id="statusBtn" data-video="https://videotourl.com/videos/1790966749460-e02f293d-dd9d-4edc-ac4c-1f6ff17a0ff8.mp4" data-caption="Status terbaru 𝐙𝐢 𝐘𝐮𝐞">
+    <div class="avatar-ring"></div>
+    <img class="avatar" src="https://cdn.phototourl.com/member/2026-10-02-e0707ef5-0f8e-4a68-a7f9-143dec2a30d4.png" alt="Foto Profil">
+    <div class="status-badge"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+  </div>
+  <p class="status-hint">✦ Ketuk avatar untuk lihat status ✦</p>
+  <h1 class="name">𝐙𝐢 𝐘𝐮𝐞 (子月)</h1>
+  <p class="username">@ziyue</p>
+  <p class="bio">Developer bot WhatsApp. Suka ngoding, ngoprek, dan bikin sesuatu yang berguna.</p>
+</div>
+<div class="page" id="page-1">
+  <h2 class="slide-title">Sosial Media</h2>
+  <p class="slide-sub">Terhubung dengan saya</p>
+  <div class="links">
+    <a class="link link-1" href="https://wa.me/6285129871386" target="_blank">
+      <div class="link-icon">WA</div>
+      <div class="link-text">WhatsApp<small>Chat langsung</small></div>
+      <span class="link-arrow">›</span>
+    </a>
+    <a class="link link-2" href="https://instagram.com/iqbal518578" target="_blank">
+      <div class="link-icon">IG</div>
+      <div class="link-text">Instagram<small>@iqbal518578</small></div>
+      <span class="link-arrow">›</span>
+    </a>
+    <a class="link link-3" href="https://tiktok.com/@iqbbblllaaa9292" target="_blank">
+      <div class="link-icon">TT</div>
+      <div class="link-text">TikTok<small>@iqbbblllaaa9292</small></div>
+      <span class="link-arrow">›</span>
+    </a>
+    <a class="link link-4" href="https://github.com/ziyuebotwa77-star" target="_blank">
+      <div class="link-icon">GH</div>
+      <div class="link-text">GitHub<small>ziyuebotwa77</small></div>
+      <span class="link-arrow">›</span>
+    </a>
+  </div>
+</div>
+<div class="page" id="page-2">
+  <h2 class="slide-title">Tools</h2>
+  <p class="slide-sub">Alat praktis sehari-hari</p>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">🔗</div><div class="tool-name">Short Link</div></div>
+    <input type="text" class="tool-input" id="shortInput" placeholder="Tempel link panjang...">
+    <button class="tool-btn" onclick="toolShort()">Perkecil Link</button>
+    <div class="tool-result" id="shortResult"></div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">📱</div><div class="tool-name">QR Code</div></div>
+    <input type="text" class="tool-input" id="qrInput" placeholder="Teks atau link...">
+    <button class="tool-btn" onclick="toolQR()">Buat QR</button>
+    <div class="tool-result" id="qrResult"></div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">🌤️</div><div class="tool-name">Cuaca</div></div>
+    <input type="text" class="tool-input" id="cuacaInput" placeholder="Nama kota...">
+    <button class="tool-btn" onclick="toolCuaca()">Cek Cuaca</button>
+    <div class="tool-result" id="cuacaResult"></div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">💱</div><div class="tool-name">Kurs</div></div>
+    <input type="text" class="tool-input" id="kursInput" placeholder="Contoh: USD IDR">
+    <button class="tool-btn" onclick="toolKurs()">Konversi</button>
+    <div class="tool-result" id="kursResult"></div>
+  </div>
+</div>
+<div class="page" id="page-3">
+  <h2 class="slide-title">AI</h2>
+  <p class="slide-sub">Tanya jawab & gambar</p>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">🤖</div><div class="tool-name">AI Chat</div></div>
+    <div class="ai-chat-box" id="aiChatBox">
+      <div class="ai-msg ai-bot">Halo! Tanya apa saja, aku jawab.</div>
+    </div>
+    <div class="ai-input-row">
+      <input type="text" id="aiChatInput" placeholder="Tulis pertanyaan..." onkeydown="if(event.key==='Enter')aiChat()">
+      <button onclick="aiChat()">Kirim</button>
+    </div>
+  </div>
+  <div class="tool-card">
+    <div class="tool-head"><div class="tool-icon">🎨</div><div class="tool-name">AI Image</div></div>
+    <input type="text" class="tool-input" id="aiImgInput" placeholder="Deskripsi gambar..." onkeydown="if(event.key==='Enter')aiImage()">
+    <button class="tool-btn" onclick="aiImage()">Buat Gambar</button>
+    <div class="ai-img-result" id="aiImgResult"></div>
+  </div>
+</div>
+<div class="page" id="page-4">
+  <h2 class="slide-title">Game</h2>
+  <p class="slide-sub">Main santai tanpa install</p>
+  <div class="game-tabs">
+    <div class="game-tab active" onclick="switchGame(0)">Suit</div>
+    <div class="game-tab" onclick="switchGame(1)">Dadu</div>
+    <div class="game-tab" onclick="switchGame(2)">Angka</div>
+    <div class="game-tab" onclick="switchGame(3)">TTT</div>
+  </div>
+  <div class="game-panel active" id="game-0">
+    <div class="suit-arena">
+      <div class="suit-side"><div class="suit-label">Kamu</div><div class="suit-emoji" id="playerEmoji">❔</div></div>
+      <div class="suit-vs">VS</div>
+      <div class="suit-side"><div class="suit-label">Bot</div><div class="suit-emoji" id="botEmoji">❔</div></div>
+    </div>
+    <div class="suit-result" id="suitResult">Pilih senjata mu!</div>
+    <div class="suit-buttons">
+      <button class="suit-btn" onclick="playSuit('gunting')">✌️</button>
+      <button class="suit-btn" onclick="playSuit('batu')">✊</button>
+      <button class="suit-btn" onclick="playSuit('kertas')">✋</button>
+    </div>
+    <div class="suit-score">
+      <div class="score-item"><div class="score-label">Menang</div><div class="score-val" id="scoreWin">0</div></div>
+      <div class="score-item"><div class="score-label">Seri</div><div class="score-val" id="scoreDraw">0</div></div>
+      <div class="score-item"><div class="score-label">Kalah</div><div class="score-val" id="scoreLose">0</div></div>
+    </div>
+    <button class="suit-reset" onclick="resetSuit()">Reset Skor</button>
+  </div>
+<div class="game-panel" id="game-1">
+  <div class="dice-area">
+    <div class="dice-box" id="diceBox">🎲</div>
+    <div class="suit-result" id="diceResult">Ketuk untuk lempar dadu</div>
+    <button class="suit-btn" style="width:100%;font-size:18px;padding:16px" onclick="rollDice()">🎲 LEMPAR DADU</button>
+    <div class="dice-history" id="diceHistory"></div>
+  </div>
+</div>
+<div class="game-panel" id="game-2">
+  <div class="angka-hint" id="angkaHint">Aku sudah pilih angka 1-100. Tebak!</div>
+  <input type="number" class="angka-input" id="angkaInput" placeholder="Masukkan angka 1-100" min="1" max="100">
+  <button class="angka-btn" onclick="tebakAngka()" id="angkaBtn">TEBAK</button>
+  <div class="angka-history" id="angkaHistory"></div>
+  <button class="suit-reset" style="margin-top:14px" onclick="resetAngka()">Main Lagi</button>
+</div>
+  <div class="game-panel" id="game-3">
+    <div class="ttt-status" id="tttStatus">Giliran kamu (❌)</div>
+    <div class="ttt-grid" id="tttGrid">
+      <div class="ttt-cell" onclick="tttPlay(0)"></div>
+      <div class="ttt-cell" onclick="tttPlay(1)"></div>
+      <div class="ttt-cell" onclick="tttPlay(2)"></div>
+      <div class="ttt-cell" onclick="tttPlay(3)"></div>
+      <div class="ttt-cell" onclick="tttPlay(4)"></div>
+      <div class="ttt-cell" onclick="tttPlay(5)"></div>
+      <div class="ttt-cell" onclick="tttPlay(6)"></div>
+      <div class="ttt-cell" onclick="tttPlay(7)"></div>
+      <div class="ttt-cell" onclick="tttPlay(8)"></div>
+    </div>
+    <button class="suit-reset" onclick="resetTTT()">Main Lagi</button>
+  </div>
+</div>
+  <div class="page" id="page-5">
+    <h2 class="slide-title">Tentang</h2>
+    <p class="slide-sub">Ketuk untuk lihat detail</p>
+    <div class="info-list">
+      <div class="info-item" onclick="openDetail('peran')"><div class="info-icon">💻</div><div class="info-content"><div class="info-label">Peran</div><div class="info-value">Developer Bot WhatsApp</div></div><span class="info-arrow">›</span></div>
+      <div class="info-item" onclick="openDetail('fokus')"><div class="info-icon">🎯</div><div class="info-content"><div class="info-label">Fokus</div><div class="info-value">Ngoding & Ngoprek</div></div><span class="info-arrow">›</span></div>
+      <div class="info-item" onclick="openDetail('lokasi')"><div class="info-icon">🌏</div><div class="info-content"><div class="info-label">Lokasi</div><div class="info-value">Indonesia</div></div><span class="info-arrow">›</span></div>
+      <div class="info-item" onclick="openDetail('skill')"><div class="info-icon">⚡</div><div class="info-content"><div class="info-label">Skill</div><div class="info-value">JavaScript, Node.js, HTML/CSS</div></div><span class="info-arrow">›</span></div>
+      <div class="info-item" onclick="openDetail('project')"><div class="info-icon">🚀</div><div class="info-content"><div class="info-label">Project Aktif</div><div class="info-value">Bot WhatsApp & Web Tools</div></div><span class="info-arrow">›</span></div>
+      <div class="info-item" onclick="openDetail('kontak')"><div class="info-icon">📬</div><div class="info-content"><div class="info-label">Kontak Bisnis</div><div class="info-value">ziyuebotwa77@gmail.com</div></div><span class="info-arrow">›</span></div>
+    </div>
+    <div class="quote">"Kode yang baik adalah kode yang bisa dimengerti oleh orang lain, bukan hanya oleh mesin."</div>
+  </div>
+  <p class="footer">© 2026 iqbal</p>
+</div>
+<div class="status-modal" id="statusModal">
+  <div class="story-container">
+    <div class="story-progress"><div class="story-progress-bar" id="progressBar"></div></div>
+    <div class="story-header">
+      <img class="story-avatar" src="https://cdn.phototourl.com/member/2026-10-02-e0707ef5-0f8e-4a68-a7f9-143dec2a30d4.png" alt="">
+      <div class="story-info"><div class="story-name">𝐙𝐢 𝐘𝐮𝐞 (子月)</div><div class="story-time">Baru saja</div></div>
+      <button class="story-close" onclick="closeStatus()">✕</button>
+    </div>
+    <video class="story-video" id="storyVideo" playsinline autoplay muted></video>
+    <button class="sound-btn" id="soundBtn" onclick="toggleSound()">
+      <svg viewBox="0 0 24 24" fill="#fff" width="20" height="20"><path id="soundPath" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0016.5 12z"/></svg>
+    </button>
+    <div class="tap-left" onclick="prevStory()"></div>
+    <div class="tap-right" onclick="nextStory()"></div>
+    <div class="story-caption" id="storyCaption"></div>
+  </div>
+</div>
+<div class="detail-modal" id="detailModal" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-box">
+    <div class="detail-icon" id="detailIcon">💻</div>
+    <h3 class="detail-title" id="detailTitle">Judul</h3>
+    <div class="detail-text" id="detailText">Isi penjelasan.</div>
+    <button class="detail-close" onclick="closeDetail()">Tutup</button>
+  </div>
+</div>
+<script>
+const tabs = document.querySelectorAll('.tab');
+const pages = document.querySelectorAll('.page');
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    const idx = tab.getAttribute('data-page');
+    tabs.forEach(t => t.classList.remove('active'));
+    pages.forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('page-' + idx).classList.add('active');
+  });
+});
+const statusBtn = document.getElementById('statusBtn');
+const statusModal = document.getElementById('statusModal');
+const storyVideo = document.getElementById('storyVideo');
+const storyCaption = document.getElementById('storyCaption');
+const progressBar = document.getElementById('progressBar');
+const soundBtn = document.getElementById('soundBtn');
+let progressTimer = null;
+statusBtn.addEventListener('click', () => {
+  const videoUrl = statusBtn.getAttribute('data-video');
+  const caption = statusBtn.getAttribute('data-caption') || '';
+  if (!videoUrl) { alert('Belum ada status'); return; }
+  storyVideo.src = videoUrl;
+  storyCaption.textContent = caption;
+  statusModal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+  storyVideo.currentTime = 0;
+  storyVideo.muted = true;
+  soundBtn.classList.remove('unmuted');
+  storyVideo.play().catch(() => {});
+  progressBar.style.width = '0%';
+  startProgress();
+});
+function closeStatus() { statusModal.classList.remove('active'); document.body.style.overflow = ''; storyVideo.pause(); storyVideo.currentTime = 0; stopProgress(); }
+function startProgress() {
+  stopProgress();
+  progressBar.style.width = '0%';
+  progressTimer = setInterval(() => {
+    const d = storyVideo.duration || 30; const c = storyVideo.currentTime || 0;
+    const p = (c / d) * 100;
+    progressBar.style.width = p + '%';
+    if (p >= 100) { stopProgress(); closeStatus(); }
+  }, 100);
+}
+function stopProgress() { if (progressTimer) { clearInterval(progressTimer); progressTimer = null; } }
+storyVideo.addEventListener('ended', () => { stopProgress(); closeStatus(); });
+function prevStory() { storyVideo.currentTime = 0; storyVideo.play().catch(() => {}); progressBar.style.width = '0%'; startProgress(); }
+function nextStory() { closeStatus(); }
+function toggleSound() {
+  storyVideo.muted = !storyVideo.muted;
+  soundBtn.classList.toggle('unmuted', !storyVideo.muted);
+  const path = document.getElementById('soundPath');
+  if (storyVideo.muted) path.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0016.5 12z');
+  else path.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 00-2.5-4.03v8.05A4.5 4.5 0 0016.5 12zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+}
+const detailData = {
+  peran: { icon: '💻', title: 'Developer Bot WhatsApp', text: 'Membangun dan merawat bot WhatsApp untuk berbagai kebutuhan — mulai dari auto-reply, manajemen grup, hingga integrasi API.' },
+  fokus: { icon: '🎯', title: 'Ngoding & Ngoprek', text: 'Setiap hari dihabiskan untuk menulis kode, bereksperimen dengan library baru, dan membongkar sistem.' },
+  lokasi: { icon: '🌏', title: 'Indonesia', text: 'Berbasis di Indonesia. Bekerja remote, terbuka untuk kolaborasi dengan siapa saja.' },
+  skill: { icon: '⚡', title: 'JavaScript, Node.js, HTML/CSS', text: 'Stack utama: JavaScript, Node.js untuk backend bot, HTML/CSS untuk tampilan web.' },
+  project: { icon: '🚀', title: 'Bot WhatsApp & Web Tools', text: 'Bot WhatsApp multi-fitur, web tools ringan, dan eksperimen antarmuka liquid glass.' },
+  kontak: { icon: '📬', title: 'ziyuebotwa77@gmail.com', text: 'Untuk kerja sama, pertanyaan, atau request bot khusus, kirim email ke alamat di atas.' }
+};
+function openDetail(key) {
+  const d = detailData[key];
+  if (!d) return;
+  document.getElementById('detailIcon').textContent = d.icon;
+  document.getElementById('detailTitle').textContent = d.title;
+  document.getElementById('detailText').textContent = d.text;
+  document.getElementById('detailModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeDetail() { document.getElementById('detailModal').classList.remove('active'); document.body.style.overflow = ''; }
+function toolShort() {
+  const el = document.getElementById('shortInput');
+  const res = document.getElementById('shortResult');
+  const url = el.value.trim();
+  if (!url) { res.innerHTML = '<span class="tool-error">Masukkan link dulu.</span>'; return; }
+  if (!url.startsWith('http')) { res.innerHTML = '<span class="tool-error">Link harus http:// atau https://</span>'; return; }
+  res.innerHTML = '<span class="tool-loading">Memproses...</span>';
+  fetch('https://is.gd/create.php?format=json&url=' + encodeURIComponent(url))
+    .then(r => r.json())
+    .then(d => {
+      if (d.shorturl) res.innerHTML = '🔗 <a href="' + d.shorturl + '" target="_blank">' + d.shorturl + '</a>';
+      else res.innerHTML = '<span class="tool-error">Gagal: ' + (d.errormessage || 'Tidak diketahui') + '</span>';
+    })
+    .catch(() => { res.innerHTML = '<span class="tool-error">Gagal konek.</span>'; });
+}
+function toolQR() {
+  const el = document.getElementById('qrInput');
+  const res = document.getElementById('qrResult');
+  const teks = el.value.trim();
+  if (!teks) { res.innerHTML = '<span class="tool-error">Masukkan teks dulu.</span>'; return; }
+  const url = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=' + encodeURIComponent(teks);
+  res.innerHTML = '<img src="' + url + '" alt="QR">';
+}
+function toolCuaca() {
+  const el = document.getElementById('cuacaInput');
+  const res = document.getElementById('cuacaResult');
+  const kota = el.value.trim();
+  if (!kota) { res.innerHTML = '<span class="tool-error">Masukkan nama kota.</span>'; return; }
+  res.innerHTML = '<span class="tool-loading">Mengambil data...</span>';
+  fetch('https://wttr.in/' + encodeURIComponent(kota) + '?format=j1')
+    .then(r => r.json())
+    .then(d => {
+      const cc = d.current_condition[0];
+      const area = d.nearest_area[0].areaName[0].value;
+      res.innerHTML = '🌤️ <b>' + area + '</b><br>🌡️ ' + cc.temp_C + '°C<br>☁️ ' + cc.weatherDesc[0].value + '<br>💧 ' + cc.humidity + '%<br>💨 ' + cc.windspeedKmph + ' km/h';
+    })
+    .catch(() => { res.innerHTML = '<span class="tool-error">Gagal ambil cuaca.</span>'; });
+}
+function toolKurs() {
+  const el = document.getElementById('kursInput');
+  const res = document.getElementById('kursResult');
+  const raw = el.value.trim().toUpperCase().split(/\s+/);
+  if (raw.length < 2) { res.innerHTML = '<span class="tool-error">Format: USD IDR</span>'; return; }
+  const [from, to] = raw;
+  res.innerHTML = '<span class="tool-loading">Mengambil kurs...</span>';
+  fetch('https://api.frankfurter.app/latest?from=' + from + '&to=' + to)
+    .then(r => r.json())
+    .then(d => {
+      const rate = d.rates && d.rates[to];
+      if (!rate) { res.innerHTML = '<span class="tool-error">Mata uang tidak valid.</span>'; return; }
+      res.innerHTML = '💱 1 ' + from + ' = <b>' + rate + ' ' + to + '</b>';
+    })
+    .catch(() => { res.innerHTML = '<span class="tool-error">Gagal ambil kurs.</span>'; });
+}
+function addAiMsg(text, isUser) {
+  const box = document.getElementById('aiChatBox');
+  const div = document.createElement('div');
+  div.className = 'ai-msg ' + (isUser ? 'ai-user' : 'ai-bot');
+  div.textContent = text;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+  return div;
+}
+function aiChat() {
+  const input = document.getElementById('aiChatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addAiMsg(text, true);
+  const thinking = addAiMsg('Sedang berpikir...', false);
+  thinking.classList.add('thinking');
+  fetch('https://text.pollinations.ai/openai', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'openai',
+      messages: [
+        { role: 'system', content: 'Jawab ramah, singkat, dalam bahasa Indonesia.' },
+        { role: 'user', content: text }
+      ]
+    })
+  })
+    .then(r => r.json())
+    .then(d => {
+      const reply = (d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content) || 'Maaf, aku tidak bisa jawab sekarang.';
+      thinking.classList.remove('thinking');
+      thinking.textContent = reply;
+    })
+    .catch(() => {
+      thinking.classList.remove('thinking');
+      thinking.textContent = 'Gagal konek ke AI. Coba lagi.';
+    });
+}
+function aiImage() {
+  const input = document.getElementById('aiImgInput');
+  const res = document.getElementById('aiImgResult');
+  const prompt = input.value.trim();
+  if (!prompt) { res.innerHTML = '<div class="tool-error">Masukkan deskripsi dulu.</div>'; return; }
+  res.innerHTML = '<div class="tool-loading">Membuat gambar... (10-30 detik)</div>';
+  const seed = Math.floor(Math.random() * 999999);
+  const url = 'https://image.pollinations.ai/prompt/' + encodeURIComponent(prompt) + '?width=768&height=768&nologo=true&seed=' + seed;
+  const img = new Image();
+  img.onload = () => { res.innerHTML = ''; res.appendChild(img); };
+  img.onerror = () => { res.innerHTML = '<div class="tool-error">Gagal buat gambar. Coba prompt lain.</div>'; };
+  img.src = url;
+  img.style.width = '100%';
+  img.style.borderRadius = '12px';
+}
+function switchGame(i) {
+  document.querySelectorAll('.game-tab').forEach((t, idx) => t.classList.toggle('active', idx === i));
+  document.querySelectorAll('.game-panel').forEach((p, idx) => p.classList.toggle('active', idx === i));
+}
+let suitWin = 0, suitDraw = 0, suitLose = 0, suitBusy = false;
+const SUIT_EMOJI = { gunting: '✌️', batu: '✊', kertas: '✋' };
+function playSuit(pick) {
+  if (suitBusy) return;
+  suitBusy = true;
+  const btns = document.querySelectorAll('.suit-btn');
+  btns.forEach(b => b.disabled = true);
+  const pEl = document.getElementById('playerEmoji');
+  const bEl = document.getElementById('botEmoji');
+  const rEl = document.getElementById('suitResult');
+  pEl.classList.remove('win','lose'); bEl.classList.remove('win','lose'); rEl.classList.remove('win','lose','draw');
+  pEl.textContent = SUIT_EMOJI[pick];
+  pEl.classList.add('shake'); bEl.textContent = '❔'; bEl.classList.add('shake');
+  rEl.textContent = 'Bot sedang memilih...';
+  setTimeout(() => {
+    pEl.classList.remove('shake'); bEl.classList.remove('shake');
+    const opsi = ['gunting','batu','kertas'];
+    const bot = opsi[Math.floor(Math.random()*3)];
+    bEl.textContent = SUIT_EMOJI[bot];
+    if (pick === bot) { suitDraw++; rEl.textContent = '🤝 Seri!'; rEl.classList.add('draw'); }
+    else if ((pick==='gunting'&&bot==='kertas')||(pick==='batu'&&bot==='gunting')||(pick==='kertas'&&bot==='batu')) {
+      suitWin++; rEl.textContent = '🎉 Kamu Menang!'; rEl.classList.add('win'); pEl.classList.add('win'); bEl.classList.add('lose');
+    } else {
+      suitLose++; rEl.textContent = '😢 Kamu Kalah!'; rEl.classList.add('lose'); pEl.classList.add('lose'); bEl.classList.add('win');
+    }
+    document.getElementById('scoreWin').textContent = suitWin;
+    document.getElementById('scoreDraw').textContent = suitDraw;
+    document.getElementById('scoreLose').textContent = suitLose;
+    setTimeout(() => { btns.forEach(b => b.disabled = false); suitBusy = false; }, 600);
+  }, 700);
+}
+function resetSuit() {
+  suitWin = 0; suitDraw = 0; suitLose = 0;
+  document.getElementById('scoreWin').textContent = 0;
+  document.getElementById('scoreDraw').textContent = 0;
+  document.getElementById('scoreLose').textContent = 0;
+  const p = document.getElementById('playerEmoji'); const b = document.getElementById('botEmoji'); const r = document.getElementById('suitResult');
+  p.textContent = '❔'; b.textContent = '❔';
+  p.classList.remove('win','lose'); b.classList.remove('win','lose');
+  r.classList.remove('win','lose','draw'); r.textContent = 'Pilih senjata mu!';
+}
+const DICE_FACES = ['⚀','⚁','⚂','⚃','⚄','⚅'];
+let diceHistory = [];
+function rollDice() {
+  const box = document.getElementById('diceBox');
+  const res = document.getElementById('diceResult');
+  const hist = document.getElementById('diceHistory');
+  box.classList.add('roll');
+  res.textContent = 'Mengocok...';
+  setTimeout(() => {
+    box.classList.remove('roll');
+    const n = Math.floor(Math.random() * 6) + 1;
+    box.textContent = DICE_FACES[n-1];
+    res.textContent = '🎯 Kamu dapat angka ' + n + '!';
+    diceHistory.unshift(n);
+    if (diceHistory.length > 8) diceHistory.pop();
+    hist.textContent = 'Riwayat: ' + diceHistory.join(' · ');
+  }, 700);
+}
+let angkaRahasia = 0, angkaNyawa = 7, angkaRiwayat = [], angkaSelesai = false;
+function resetAngka() {
+  angkaRahasia = Math.floor(Math.random() * 100) + 1;
+  angkaNyawa = 7; angkaRiwayat = []; angkaSelesai = false;
+  const h = document.getElementById('angkaHint');
+  h.className = 'angka-hint';
+  h.textContent = 'Aku sudah pilih angka 1-100. Nyawa: 7';
+  document.getElementById('angkaInput').value = '';
+  document.getElementById('angkaInput').disabled = false;
+  document.getElementById('angkaBtn').disabled = false;
+  document.getElementById('angkaHistory').textContent = '';
+}
+function tebakAngka() {
+  if (angkaSelesai) return;
+  const input = document.getElementById('angkaInput');
+  const hint = document.getElementById('angkaHint');
+  const hist = document.getElementById('angkaHistory');
+  const val = parseInt(input.value);
+  if (isNaN(val) || val < 1 || val > 100) {
+    hint.className = 'angka-hint';
+    hint.textContent = 'Masukkan angka 1-100.';
+    return;
+  }
+  angkaRiwayat.push(val);
+  const jarak = Math.abs(val - angkaRahasia);
+  if (val === angkaRahasia) {
+    angkaSelesai = true;
+    hint.className = 'angka-hint benar';
+    hint.textContent = '🎉 BENAR! Angkanya ' + angkaRahasia + '. Kamu menang!';
+    input.disabled = true;
+    document.getElementById('angkaBtn').disabled = true;
+  } else {
+    angkaNyawa--;
+    if (angkaNyawa <= 0) {
+      angkaSelesai = true;
+      hint.className = 'angka-hint';
+      hint.textContent = '💀 Game Over. Angkanya ' + angkaRahasia + '.';
+      input.disabled = true;
+      document.getElementById('angkaBtn').disabled = true;
+    } else {
+      if (jarak <= 5) { hint.className = 'angka-hint panas'; hint.textContent = '🔥 PANAS! ' + (val < angkaRahasia ? 'Terlalu kecil.' : 'Terlalu besar.') + ' Nyawa: ' + angkaNyawa; }
+      else if (jarak <= 15) { hint.className = 'angka-hint'; hint.textContent = '🌤️ Hangat. ' + (val < angkaRahasia ? 'Terlalu kecil.' : 'Terlalu besar.') + ' Nyawa: ' + angkaNyawa; }
+      else { hint.className = 'angka-hint dingin'; hint.textContent = '❄️ DINGIN! ' + (val < angkaRahasia ? 'Terlalu kecil.' : 'Terlalu besar.') + ' Nyawa: ' + angkaNyawa; }
+    }
+  }
+  hist.textContent = 'Tebakan: ' + angkaRiwayat.join(', ');
+  input.value = '';
+}
+let tttBoard = ['','','','','','','','',''];
+let tttDone = false;
+function tttRender() {
+  const cells = document.querySelectorAll('.ttt-cell');
+  cells.forEach((c, i) => {
+    c.textContent = tttBoard[i] === 'X' ? '❌' : tttBoard[i] === 'O' ? '⭕' : '';
+  });
+}
+function tttCheck() {
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for (const [a,b,c] of lines) {
+    if (tttBoard[a] && tttBoard[a] === tttBoard[b] && tttBoard[a] === tttBoard[c]) return tttBoard[a];
+  }
+  if (!tttBoard.includes('')) return 'draw';
+  return null;
+}
+function tttPlay(i) {
+  if (tttDone || tttBoard[i]) return;
+  tttBoard[i] = 'X';
+  tttRender();
+  const res = tttCheck();
+  if (res) { tttEnd(res); return; }
+  document.getElementById('tttStatus').textContent = 'Giliran bot...';
+  setTimeout(() => {
+    const empty = tttBoard.map((v, idx) => v === '' ? idx : -1).filter(x => x !== -1);
+    if (empty.length === 0) { tttEnd('draw'); return; }
+    const pick = empty[Math.floor(Math.random() * empty.length)];
+    tttBoard[pick] = 'O';
+    tttRender();
+    const res2 = tttCheck();
+    if (res2) { tttEnd(res2); return; }
+    const st = document.getElementById('tttStatus');
+    st.className = 'ttt-status';
+    st.textContent = 'Giliran kamu (❌)';
+  }, 400);
+}
+function tttEnd(res) {
+  tttDone = true;
+  const status = document.getElementById('tttStatus');
+  if (res === 'X') { status.className = 'ttt-status win'; status.textContent = '🎉 Kamu MENANG!'; }
+  else if (res === 'O') { status.className = 'ttt-status lose'; status.textContent = '😢 Kamu kalah.'; }
+  else { status.className = 'ttt-status draw'; status.textContent = '🤝 Seri!'; }
+  tttRender();
+}
+function resetTTT() {
+  tttBoard = ['','','','','','','','',''];
+  tttDone = false;
+  const status = document.getElementById('tttStatus');
+  status.className = 'ttt-status';
+  status.textContent = 'Giliran kamu (❌)';
+  tttRender();
+}
+resetAngka();
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (statusModal.classList.contains('active')) closeStatus();
+    if (document.getElementById('detailModal').classList.contains('active')) closeDetail();
+  }
+});
+</script>
 </body>
 </html>
